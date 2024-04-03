@@ -30,7 +30,7 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd Client
+  cd HustleTask_CLIENT
 ```
 
 Install dependencies
