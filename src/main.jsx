@@ -5,7 +5,7 @@ import "./styles/app.scss";
 import { createContext } from "react";
 
 
-export const server =  'http://localhost:8001/api/v1'
+export const server =  'https://hustletask-server.onrender.com/api/v1'
 
 export const Context = createContext({ isAuthenticated: false });
 
