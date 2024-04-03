@@ -4,7 +4,7 @@ import { Context, server } from "../main";
 import { toast } from "react-hot-toast";
 import TodoItem from "../components/TodoItem";
 import { Navigate } from "react-router-dom";
-import TaskList from "../components/taskListing";
+import TaskList from "../components/TaskListing";
 
 
 const Home = () => {
@@ -15,11 +15,7 @@ const Home = () => {
   const [currentPage,setCurrentPage] = useState(1)
   const [totalCount, setTotalCount] = useState(0)
   const [limit]= useState(3)
-  const[totalPages,setTotalPages] = useState(Math.ceil(totalCount / limit))
-  const [hasMore, setHasMore] = useState([])
   const [tasks, setTasks]= useState([])
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-
   const { isAuthenticated } = useContext(Context);
 
   const updateHandler = async (id) => {
@@ -94,9 +90,8 @@ const Home = () => {
           setTasks(response?.data?.tasks);
        
           setTotalCount(response?.data?.totalCount)
-          console.log(totalCount)
-          setTotalPages(Math.ceil(response?.data?.totalCount / limit))
-          setHasMore(response.data.tasks.length === limit)
+
+        
           
       
        
@@ -115,7 +110,7 @@ const Home = () => {
     if(tasks.length < totalCount){
       setCurrentPage(prevPage => prevPage + 1);
     }else {
-      toast.success('no more')
+      toast.error('no more tasks')
     }
      
    
@@ -170,7 +165,7 @@ const Home = () => {
           
         ))}
         
-        {tasks.length > 0    &&  (
+        {tasks.length > 0  &&  (
          <TaskList
              nextPageHandler= {nextPageHandler}
              prevPageHandler= {prevPageHandler}
